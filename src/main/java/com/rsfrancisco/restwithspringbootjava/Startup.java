@@ -1,4 +1,4 @@
-package com.rsfrancisco;
+package com.rsfrancisco.restwithspringbootjava;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
