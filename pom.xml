@@ -56,7 +56,11 @@
 			<artifactId>dozer-core</artifactId>
 			<version>${dozermapper.version}</version>
 		</dependency>
-		<!-- -->
+		<!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
 		<!-- -->
 		<!-- -->
 		<!-- -->
