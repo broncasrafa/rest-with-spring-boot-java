@@ -15,6 +15,7 @@
 	<properties>
 		<java.version>20</java.version>
 		<dozermapper.version>6.4.1</dozermapper.version>
+		<modelmapper.version>3.1.1</modelmapper.version>
 	</properties>
 
 	<dependencies>
@@ -61,7 +62,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
-		<!-- -->
+		<!-- modelmapper -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${modelmapper.version}</version>
+		</dependency>
 		<!-- -->
 		<!-- -->
 		<!-- -->
