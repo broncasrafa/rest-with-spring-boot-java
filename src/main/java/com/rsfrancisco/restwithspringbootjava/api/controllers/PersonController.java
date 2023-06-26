@@ -1,16 +1,20 @@
 package com.rsfrancisco.restwithspringbootjava.api.controllers;
 
 import com.rsfrancisco.restwithspringbootjava.application.services.PersonService;
-import com.rsfrancisco.restwithspringbootjava.application.valueobjects.v1.PersonVO;
+import com.rsfrancisco.restwithspringbootjava.application.valueobjects.PersonVO;
+import com.rsfrancisco.restwithspringbootjava.domain.utils.MediaTypeUtil;
 import com.rsfrancisco.restwithspringbootjava.domain.utils.UrlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/persons")
+@RequestMapping(value = "/api/persons",
+                produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaTypeUtil.APPLICATION_YAML_VALUE })
 public class PersonController {
     @Autowired
     private PersonService _service;

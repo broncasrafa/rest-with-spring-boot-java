@@ -2,7 +2,7 @@ package com.rsfrancisco.restwithspringbootjava.application.services;
 
 import com.rsfrancisco.restwithspringbootjava.application.exceptions.ResourceNotFoundException;
 import com.rsfrancisco.restwithspringbootjava.application.mappers.Mapper;
-import com.rsfrancisco.restwithspringbootjava.application.valueobjects.v1.PersonVO;
+import com.rsfrancisco.restwithspringbootjava.application.valueobjects.PersonVO;
 import com.rsfrancisco.restwithspringbootjava.domain.entities.Person;
 import com.rsfrancisco.restwithspringbootjava.domain.interfaces.repositories.IPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +40,7 @@ public class PersonService {
         db.setLastName(person.getLastName());
         db.setAddress(person.getAddress());
         db.setGender(person.getGender());
+        db.setBirthDate(person.getBirthDate());
         var obj = _repository.save(db);
 
         return Mapper.mapper(obj, PersonVO.class);

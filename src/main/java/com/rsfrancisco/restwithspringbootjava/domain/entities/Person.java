@@ -2,6 +2,7 @@ package com.rsfrancisco.restwithspringbootjava.domain.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +20,10 @@ public class Person {
     private String address;
     @Column(length = 6, nullable = false)
     private String gender;
+    @Column(name="birth_date", nullable = true)
+    private Date birthDate;
+
+
 
     public Person() {}
     public Person(Long id, String firstName, String lastName, String address, String gender) {
@@ -64,6 +69,13 @@ public class Person {
         this.gender = gender;
     }
 
+    public Date getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,11 +85,12 @@ public class Person {
                 Objects.equals(firstName, person.firstName) &&
                 Objects.equals(lastName, person.lastName) &&
                 Objects.equals(address, person.address) &&
-                Objects.equals(gender, person.gender);
+                Objects.equals(gender, person.gender) &&
+                Objects.equals(birthDate, person.birthDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, gender);
+        return Objects.hash(id, firstName, lastName, address, gender, birthDate);
     }
 }

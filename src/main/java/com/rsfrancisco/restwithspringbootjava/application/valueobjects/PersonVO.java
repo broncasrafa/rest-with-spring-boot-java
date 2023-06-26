@@ -1,16 +1,32 @@
-package com.rsfrancisco.restwithspringbootjava.application.valueobjects.v1;
+package com.rsfrancisco.restwithspringbootjava.application.valueobjects;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
+
+@JsonPropertyOrder({ "id", "firstName", "lastName", "birthDate", "gender", "address" })
 public class PersonVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @JsonProperty(value="first_name")
     private String firstName;
+
+    @JsonProperty(value="last_name")
     private String lastName;
     private String address;
     private String gender;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
+    @JsonProperty(value="birth_date")
+    private Date birthDate;
+
+
 
     public PersonVO() {}
 
@@ -49,6 +65,13 @@ public class PersonVO implements Serializable {
         this.gender = gender;
     }
 
+    public Date getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,11 +81,12 @@ public class PersonVO implements Serializable {
                 Objects.equals(firstName, personVO.firstName) &&
                 Objects.equals(lastName, personVO.lastName) &&
                 Objects.equals(address, personVO.address) &&
-                Objects.equals(gender, personVO.gender);
+                Objects.equals(gender, personVO.gender) &&
+                Objects.equals(birthDate, personVO.birthDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, gender);
+        return Objects.hash(id, firstName, lastName, address, gender, birthDate);
     }
 }
