@@ -5,7 +5,7 @@ import com.rsfrancisco.restwithspringbootjava.application.services.PersonService
 import com.rsfrancisco.restwithspringbootjava.application.valueobjects.PersonVO;
 import com.rsfrancisco.restwithspringbootjava.domain.entities.Person;
 import com.rsfrancisco.restwithspringbootjava.domain.interfaces.repositories.IPersonRepository;
-import com.rsfrancisco.restwithspringbootjava.unittests.mapper.mocks.PersonMock;
+import com.rsfrancisco.restwithspringbootjava.unittests.mocks.PersonMock;
 import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;

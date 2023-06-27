@@ -1,4 +1,4 @@
-package com.rsfrancisco.restwithspringbootjava.unittests.mapper.mocks;
+package com.rsfrancisco.restwithspringbootjava.unittests.mocks;
 
 import com.rsfrancisco.restwithspringbootjava.application.valueobjects.PersonVO;
 import com.rsfrancisco.restwithspringbootjava.domain.entities.Person;
