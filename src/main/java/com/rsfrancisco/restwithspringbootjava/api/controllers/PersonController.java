@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import javax.print.attribute.standard.Media;
 import java.util.List;
@@ -21,20 +23,23 @@ public class PersonController {
 
     @GetMapping
     public ResponseEntity<List<PersonVO>> findAll() {
-        var list = _service.getAll();
-        return ResponseEntity.ok().body(list);
+        var persons = _service.getAll();
+        persons.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
+        return ResponseEntity.ok().body(persons);
     }
 
     @GetMapping(value="/{id}")
     public ResponseEntity<PersonVO> findById(@PathVariable Long id) {
         var person = _service.getById(id);
+        // adicionando o hateoas
+        person.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
         return ResponseEntity.ok().body(person);
     }
 
     @PostMapping
     public ResponseEntity<PersonVO> create(@RequestBody PersonVO model) {
         var person = _service.insert(model);
-        return ResponseEntity.created(UrlUtil.getURI("/{id}", person.getId())).build();
+        return ResponseEntity.created(UrlUtil.getURI("/{id}", person.getKey())).build();
     }
 
     @PutMapping(value="/{id}")

@@ -1,19 +1,25 @@
 package com.rsfrancisco.restwithspringbootjava.application.services;
 
+import com.rsfrancisco.restwithspringbootjava.application.exceptions.RequiredObjectIsNullException;
 import com.rsfrancisco.restwithspringbootjava.application.exceptions.ResourceNotFoundException;
 import com.rsfrancisco.restwithspringbootjava.application.mappers.Mapper;
 import com.rsfrancisco.restwithspringbootjava.application.valueobjects.PersonVO;
 import com.rsfrancisco.restwithspringbootjava.domain.entities.Person;
 import com.rsfrancisco.restwithspringbootjava.domain.interfaces.repositories.IPersonRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class PersonService {
+    private Logger logger = Logger.getLogger(PersonService.class.getName());
+
     @Autowired
     private IPersonRepository _repository;
+
 
     public PersonVO getById(Long id) {
         var person = _repository.findById(id)
@@ -27,6 +33,8 @@ public class PersonService {
     }
 
     public PersonVO insert(PersonVO person) {
+        if (person == null) throw new RequiredObjectIsNullException();
+
         var data = Mapper.mapper(person, Person.class);
         var obj = _repository.save(data);
 
@@ -34,6 +42,8 @@ public class PersonService {
     }
 
     public PersonVO update(Long id, PersonVO person) {
+        if (person == null) throw new RequiredObjectIsNullException();
+
         var db = _repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Object not exists with id: "+id));
         db.setFirstName(person.getFirstName());

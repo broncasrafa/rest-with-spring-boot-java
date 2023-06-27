@@ -1,6 +1,7 @@
 package com.rsfrancisco.restwithspringbootjava.api.exception;
 
 import com.rsfrancisco.restwithspringbootjava.application.exceptions.ExceptionResponse;
+import com.rsfrancisco.restwithspringbootjava.application.exceptions.RequiredObjectIsNullException;
 import com.rsfrancisco.restwithspringbootjava.application.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,13 @@ public class ApiResponseEntityExceptionHandler extends ResponseEntityExceptionHa
     @ExceptionHandler(ResourceNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handlerResourceNotFoundExceptions(ResourceNotFoundException exception, HttpServletRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
+        ExceptionResponse exceptionResponse = new ExceptionResponse(exception.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(exceptionResponse);
+    }
+
+    @ExceptionHandler(RequiredObjectIsNullException.class)
+    public final ResponseEntity<ExceptionResponse> handlerRequiredObjectIsNullExceptions(RequiredObjectIsNullException exception, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         ExceptionResponse exceptionResponse = new ExceptionResponse(exception.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(exceptionResponse);
     }
